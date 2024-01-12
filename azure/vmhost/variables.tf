@@ -11,9 +11,9 @@ variable "location" {
   type = string
   description = "Azure Location aka Region"
 }
-variable "net_name" {
+variable "infra_name" {
   type        = string
-  description = "Name the Net"
+  description = "Name the Infra"
 }
 variable "env_name" {
   type        = string
