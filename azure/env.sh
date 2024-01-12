@@ -42,7 +42,7 @@ echo TFSTATE_RG: "${TFSTATE_RG}"
 export TF_VAR_tfstate_rg="${TFSTATE_RG}"
 
 # ARM Access key is used for access to TFState Storage Account
-echo ARM_ACCESS_KEY: ${ARM_ACCESS_KEY}
+echo ARM_TFSTATE_KEY: ${ARM_TFSTATE_KEY}
 
 LOCATION=$(echo "${LOCATION}" | tr -d '[:space:]')
 export TF_VAR_location="${LOCATION}"
