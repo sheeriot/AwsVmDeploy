@@ -40,7 +40,7 @@ jobs:
       ARM_SUBSCRIPTION_ID: ${{ vars.ARM_SUBSCRIPTION_ID }}
       ARM_CLIENT_ID: ${{ vars.ARM_CLIENT_ID }}
       ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-      ARM_ACCESS_KEY: ${{ secrets.ARM_TFSTORE_ACCESSKEY }}
+      ARM_ACCESS_KEY: ${{ secrets.ARM_TFSTATE_ACCESSKEY }}
       TFSTATE_SUFFIX: ${{ vars.TFSTATE_SUFFIX }}
       LOCATION: ${{ vars.LOCATION }}
       CIDR_BLOCK: ${{ vars.CIDR_BLOCK }}

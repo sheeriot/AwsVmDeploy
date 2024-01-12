@@ -23,18 +23,18 @@ To utilize this DevHost project:
   - If you are using Enviroments (Public Repo or Paid GitHub), use the workflow for Environments (_pending_), put the variables/secrets in the environment settings, and leave out the ENV_NAME variable.
 
     Variables:
-    - ENV_NAME * 
     - INFRA_NAME
+    - VM_NAME
     - LOCATION
     - CIDR_BLOCK
-    - STATE_SUFFIX
+    - TFSTATE_SUFFIX
     - ARM_TENANT_ID
     - ARM_SUBSCRIPTION_ID
     - ARM_CLIENT_ID
 
     Secrets:
     - ARM_CLIENT_SECRET
-    - ARM_TFSTORE_ACCESSKEY
+    - ARM_TFSTATE_ACCESSKEY
 
     Notes:
     
