@@ -30,7 +30,7 @@ variable "vm_user" {
 variable "vm_size" {
   type = string
   description = "Size of Azure VM"
-  # default = "Standard_B2s"
+  default = "Standard_B2s"
   # https://learn.microsoft.com/en-us/azure/virtual-machines/sizes-b-series-burstable
 }
 variable "image_publisher" {

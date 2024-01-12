@@ -57,3 +57,8 @@ export TF_VAR_admin_pass="${ADMIN_PASS}"
 
 SSH_SRC1=$(echo "${SSH_SRC1}" | tr -d '[:space:]')
 export TF_VAR_ssh_src1="${SSH_SRC1}"
+
+# check for provided VM_SIZE
+if [ -n "${VM_SIZE}" ]; then
+    VM_SIZE=$(echo "${VM_SIZE}" | tr -d '[:space:]')
+    export TF_VAR_vm_size="${VM_SIZE}"

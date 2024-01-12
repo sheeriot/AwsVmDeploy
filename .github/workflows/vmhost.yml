@@ -34,6 +34,7 @@ jobs:
       ENV_NAME: ${{ github.event.inputs.environment }}
       INFRA_NAME: ${{ vars.INFRA_NAME }}
       VM_NAME: ${{ vars.VM_NAME }}
+      VM_SIZE: ${{ vars.VM_SIZE }}
       COMPONENT: ${{ github.event.inputs.component }}
       TERRAFORM_ACTION: ${{ github.event.inputs.action }}
       ARM_TENANT_ID: ${{ vars.ARM_TENANT_ID }}
@@ -52,6 +53,8 @@ jobs:
         run: |
           echo "ENV_NAME: ${ENV_NAME}"
           echo "TERRAFORM_ACTION: ${TERRAFORM_ACTION}"
+          echo "VM Name/Size: ${VM_NAME}/${VM_SIZE}"
+          echo "SSH_SRC1: ${SSH_SRC}"
           echo "COMPONENT: $COMPONENT"
           echo "ARM_TENANT_ID: $ARM_TENANT_ID"
           echo "ARM_SUBSCRIPTION_ID: $ARM_SUBSCRIPTION_ID"
