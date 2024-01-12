@@ -3,6 +3,10 @@ name: VM Host - Terraform an Azure VM
 on:
   workflow_dispatch:
     inputs:
+      environment:
+        description: 'Environment to Deploy'
+        type: environment
+        required: true
       component:
         description: 'Component to Deploy'
         type: choice
@@ -25,10 +29,10 @@ jobs:
   terraform-infra:
 
     runs-on: ubuntu-latest
-    
+    environment: ${{ github.event.inputs.environment }}
     env:
+      ENV_NAME: ${{ github.event.inputs.environment }}
       INFRA_NAME: ${{ vars.INFRA_NAME }}
-      ENV_NAME: ${{ vars.ENV_NAME }}
       VM_NAME: ${{ vars.VM_NAME }}
       COMPONENT: ${{ github.event.inputs.component }}
       TERRAFORM_ACTION: ${{ github.event.inputs.action }}
