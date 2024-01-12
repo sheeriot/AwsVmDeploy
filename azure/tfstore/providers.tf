@@ -11,9 +11,9 @@ provider "azurerm" {
 }
 
 locals {
-  net_env = "${var.net_name}-${var.env_name}_net"
+  net_env = "${var.infra_name}-${var.env_name}_net"
   tags   = {
-    network = var.net_name
+    network = var.infra_name
     environment = var.env_name
     infra_group = var.component
     owner       = var.owner

@@ -1,20 +1,15 @@
 #!/bin/bash
 # Normalize ENV Variables from Pipeline Variables
-# v0.8
+# v0.9
 # Azure Edition
 
-# ------ Infra and Compute Name --------
-export INFRA_NAME=devhost
+# These now come from the ENV
 export TF_VAR_infra_name=$(echo "${INFRA_NAME}" | tr '[:upper:]' '[:lower:]')
-# net_name is set to infra_name for use within Terraform
-export TF_VAR_net_name=$TF_VAR_infra_name
+echo TF_VAR_infra_name: ${TF_VAR_infra_name}
 
-export COMPUTE_NAME=vm0
-export TF_VAR_compute_name=$(echo "${COMPUTE_NAME}" | tr '[:upper:]' '[:lower:]')
+export TF_VAR_vm_name=$(echo "${VM_NAME}" | tr '[:upper:]' '[:lower:]')
+echo TF_VAR_vm_name: ${TF_VAR_vm_name}
 
-# --------------------------------------
-
-echo "Setting up variables for ENV_NAME: ${ENV_NAME}"
 export TF_VAR_env_name=$(echo "${ENV_NAME}" | tr '[:upper:]' '[:lower:]')
 echo TF_VAR_env_name: ${TF_VAR_env_name}
 
@@ -59,3 +54,6 @@ echo TF_VAR_cidr_block: ${TF_VAR_cidr_block}
 
 ADMIN_PASS=$(echo "${ADMIN_PASS}" | tr -d '[:space:]')
 export TF_VAR_admin_pass="${ADMIN_PASS}"
+
+SSH_SRC1=$(echo "${SSH_SRC1}" | tr -d '[:space:]')
+export TF_VAR_ssh_src1="${SSH_SRC1}"

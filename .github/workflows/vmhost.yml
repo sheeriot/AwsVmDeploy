@@ -9,7 +9,7 @@ on:
         options:
           - 'tfstore'
           - 'network'
-          - 'devhost'
+          - 'vmhost'
       action:
         description: 'Terraform Action to Perform'
         type: choice
@@ -27,7 +27,9 @@ jobs:
     runs-on: ubuntu-latest
     
     env:
+      INFRA_NAME: ${{ vars.INFRA_NAME }}
       ENV_NAME: ${{ vars.ENV_NAME }}
+      VM_NAME: ${{ vars.VM_NAME }}
       COMPONENT: ${{ github.event.inputs.component }}
       TERRAFORM_ACTION: ${{ github.event.inputs.action }}
       ARM_TENANT_ID: ${{ vars.ARM_TENANT_ID }}
@@ -38,7 +40,7 @@ jobs:
       TFSTATE_SUFFIX: ${{ vars.TFSTATE_SUFFIX }}
       LOCATION: ${{ vars.LOCATION }}
       CIDR_BLOCK: ${{ vars.CIDR_BLOCK }}
-      ADMIN_PASS: ${{ secrets.ADMIN_PASS }}
+      SSH_SRC1: ${{ vars.SSH_SRC1 }}
 
     steps:
 

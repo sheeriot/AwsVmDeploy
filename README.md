@@ -1,4 +1,4 @@
-# Terraform: Azure DevHost
+# Terraform: Azure VM Host
 
 ## Table of Contents
   - [Description](#description)
@@ -23,7 +23,8 @@ To utilize this DevHost project:
   - If you are using Enviroments (Public Repo or Paid GitHub), use the workflow for Environments (_pending_), put the variables/secrets in the environment settings, and leave out the ENV_NAME variable.
 
     Variables:
-    - ENV_NAME
+    - ENV_NAME * 
+    - INFRA_NAME
     - LOCATION
     - CIDR_BLOCK
     - STATE_SUFFIX

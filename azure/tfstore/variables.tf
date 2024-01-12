@@ -13,7 +13,7 @@ variable "location" {
   description = "Azure Region"
   # default     = "eastus"
 }
-variable "net_name" {
+variable "infra_name" {
   type        = string
   description = "Name the Net"
   default    = "net1"
