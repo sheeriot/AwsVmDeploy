@@ -62,3 +62,4 @@ export TF_VAR_ssh_src1="${SSH_SRC1}"
 if [ -n "${VM_SIZE}" ]; then
     VM_SIZE=$(echo "${VM_SIZE}" | tr -d '[:space:]')
     export TF_VAR_vm_size="${VM_SIZE}"
+fi
