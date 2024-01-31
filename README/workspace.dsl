@@ -32,9 +32,11 @@ workspace "Azure VM Deploy" "A Deployment Engine for Deploying a VM to Azure usi
                     tfstate = container "TFState" "Terraform State" "storage" tfstatetag 
                     osdisk = container "OSDisk" "VM Disk" "storage" osdisktag
                 }
-                azurecompute = softwareSystem "Azure VM" "Docker Host" vmtag {
-                    -> azurestorage.osdisk "file system"
-                    azurenetwork.nic -> this attached
+                azurecompute = softwareSystem "Azure VM" "Azure VM" vmtag {
+                    dockerhost = container "Docker Host" "Docker Host" docker dockertag {
+                        -> azurestorage.osdisk "file system"
+                        azurenetwork.nic -> this attached
+                    }
                 }
             }
         }
@@ -50,18 +52,19 @@ workspace "Azure VM Deploy" "A Deployment Engine for Deploying a VM to Azure usi
                 -> azurestorage.tfstate "terraform state" persistence
             }
         }
-
     }
 
     views {
-        systemContext azurecompute "AzureVM" "AzureVM in the Cloud" {
+        systemContext azurecompute "AzureVM" "Azure VM" {
+            include *
             include azurenetwork
             include azurestorage
-            include *
             include clientbrowser
         }
-        # container <software system identifier> [key] [description]
         container activedirectory "AzureAD" "Azure Active Directory" {
+            include *
+        }
+        container azurecompute "AzureCompute" "Azure Compute" {
             include *
         }
         container azurenetwork "AzureNetwork" "Azure Network" {
@@ -139,6 +142,11 @@ workspace "Azure VM Deploy" "A Deployment Engine for Deploying a VM to Azure usi
                 icon docs/icons/hard-drive.png
             }
             element vmtag {
+                background MediumSeaGreen
+                color black
+                icon docs/icons/vm.png
+            }
+            element dockertag {
                 background PaleGreen
                 color black
                 icon docs/icons/docker.png
@@ -181,7 +189,6 @@ workspace "Azure VM Deploy" "A Deployment Engine for Deploying a VM to Azure usi
                 icon docs/icons/dns.png
             }
         }
-
     }
     configuration {
         # scope softwaresystem
