@@ -45,7 +45,8 @@ resource "azurerm_linux_virtual_machine" "vm0" {
   custom_data = base64encode(templatefile("scripts/cloud-init.tftpl", {
       hostname = local.hostname,
       username = var.vm_user,
-      pubkey1 = file("${path.module}/pubkeys/${var.pubkey1_file}"),
+      # pubkey1 = file("${path.module}/pubkeys/${var.pubkey1_file}"),
+      pubkey1 = var.ssh_pubkey1
     }))
   
   network_interface_ids = [
