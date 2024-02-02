@@ -59,6 +59,7 @@ SSH_SRC1=$(echo "${SSH_SRC1}" | tr -d '[:space:]')
 export TF_VAR_ssh_src1="${SSH_SRC1}"
 
 export TF_VAR_ssh_pubkey1="${SSH_PUBKEY1}"
+echo TF_VAR_ssh_pubkey1: ${TF_VAR_ssh_pubkey1}
 
 # check for provided VM_SIZE
 if [ -n "${VM_SIZE}" ]; then
