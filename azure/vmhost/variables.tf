@@ -52,14 +52,18 @@ variable "ssh_src1" {
   type = string
   description = "ssh source ip address 1"
 }
+variable "ssh_pubkey1" {
+  type = string
+  description = "ssh public key"
+}
 variable "ssh_src1name" {
   type = string
   description = "ssh source name 1"
 }
-variable "pubkey1_file" {
-  type = string
-  description = "public ssh key 1 for devops remote access"
-}
+# variable "pubkey1_file" {
+#   type = string
+#   description = "public ssh key 1 for devops remote access"
+# }
 # variable "pubkey2_file" {
 #   type = string
 #   description = "public ssh key 2 for devops remote access"

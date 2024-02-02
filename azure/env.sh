@@ -1,6 +1,6 @@
 #!/bin/bash
 # Normalize ENV Variables from Pipeline Variables
-# v0.9
+# v0.10
 # Azure Edition
 
 # These now come from the ENV
@@ -57,6 +57,8 @@ export TF_VAR_admin_pass="${ADMIN_PASS}"
 
 SSH_SRC1=$(echo "${SSH_SRC1}" | tr -d '[:space:]')
 export TF_VAR_ssh_src1="${SSH_SRC1}"
+
+export TF_VAR_ssh_pubkey1="${SSH_PUBKEY1}"
 
 # check for provided VM_SIZE
 if [ -n "${VM_SIZE}" ]; then
