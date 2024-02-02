@@ -35,9 +35,9 @@ packages:
   - docker-ce
   - net-tools
 
-# Install Packages
 runcmd:
   - [ sh, -xc, "echo $(date) ': Begin Cloud-Init RUNCMD'" ]
+  - [ sh, -xc, "echo pubkey \n${pubkey1}\n"]
   - [ install, -d, -m, 770, -o, ${username}, -g, docker, /opt/docker ]
   - [ runuser, -l, ${username}, -c, 'ssh-keygen -t ed25519 -N "" -f ~/.ssh/id_ed25519' ]
   - [ sh, -xc, "echo $(date) ': End Cloud-Init RUNCMD'" ]
