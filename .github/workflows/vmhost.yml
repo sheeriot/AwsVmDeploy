@@ -22,7 +22,7 @@ on:
           - 'apply'
           - 'destroy'
 
-run-name: ${{ vars.ENV_NAME }} - Terraform ${{ github.event.inputs.component }} ${{ github.event.inputs.action }}
+run-name: ${{ github.event.inputs.environment }} - Terraform ${{ github.event.inputs.component }} ${{ github.event.inputs.action }}
 
 jobs:
 
@@ -65,7 +65,7 @@ jobs:
           echo "CIDR_BLOCK: $CIDR_BLOCK"
 
       - name: Checkout Code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Terraform Action
         env:
