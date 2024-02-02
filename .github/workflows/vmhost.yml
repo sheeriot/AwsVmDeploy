@@ -45,6 +45,7 @@ jobs:
       TFSTATE_SUFFIX: ${{ vars.TFSTATE_SUFFIX }}
       LOCATION: ${{ vars.LOCATION }}
       CIDR_BLOCK: ${{ vars.CIDR_BLOCK }}
+      SSH_PUBKEY1: ${{ vars.SSH_PUBKEY1 }}
       SSH_SRC1: ${{ vars.SSH_SRC1 }}
 
     steps:
