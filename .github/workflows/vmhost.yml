@@ -55,7 +55,7 @@ jobs:
           echo "ENV_NAME: ${ENV_NAME}"
           echo "TERRAFORM_ACTION: ${TERRAFORM_ACTION}"
           echo "VM Name/Size: ${VM_NAME}/${VM_SIZE}"
-          echo "SSH_SRC1: ${SSH_SRC}"
+          echo "SSH_SRC1: ${SSH_SRC1}"
           echo "COMPONENT: $COMPONENT"
           echo "ARM_TENANT_ID: $ARM_TENANT_ID"
           echo "ARM_SUBSCRIPTION_ID: $ARM_SUBSCRIPTION_ID"
