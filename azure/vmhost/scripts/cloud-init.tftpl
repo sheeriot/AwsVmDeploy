@@ -15,7 +15,9 @@ users:
     groups: docker, devops
     ssh_authorized_keys:
       - ${pubkey1}
-
+    shell: /bin/bash
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    
 apt:
   sources:
     docker.list:

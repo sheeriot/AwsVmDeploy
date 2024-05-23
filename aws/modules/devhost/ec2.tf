@@ -9,8 +9,6 @@ resource "aws_instance" "devhost" {
       hostname = var.hostname,
       username = var.username,
       pubkey1 = var.pubkey1,
-      # pubkey2 = var.pubkey2,
-      # pubkey3 = var.pubkey3,
       pubkey2 = tls_private_key.ssh.public_key_openssh
     }
   )

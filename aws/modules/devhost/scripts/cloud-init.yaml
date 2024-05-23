@@ -1,65 +1,53 @@
 #cloud-config
-# figure out the hostname monkey business
-#https://cloudinit.readthedocs.io/en/latest/topics/modules.html#set-hostname
-# preserve_hostname: true
+
 hostname: ${hostname}
-# fqdn: ${hostname}.example.local
-# prefer_fqdn_over_hostname: true
 
-disable_root: true
-
+# Add groups
 groups:
-  - devops
-  - docker
+  - devops: [${username}]
+  - docker: [${username}]
 
+# Setup Users
 users:
+  - default
   - name: ${username}
-    groups: [sudo, adm, docker]
+    shell: /bin/bash  
+    groups: docker, devops
     ssh_authorized_keys:
       - ${pubkey1}
-      - ${pubkey2}
     shell: /bin/bash
     sudo: ALL=(ALL) NOPASSWD:ALL
 
-# Install Packages
+apt:
+  sources:
+    docker.list:
+      source: deb [arch=amd64] https://download.docker.com/linux/ubuntu $RELEASE stable
+      keyid: 9DC858229FC7DD38854AE2D88D81803C0EBFCD88
+
+# update all packages and reboot
 package_update: true
 package_upgrade: true
-
-packages:
-  - git
-  # - gcc-c++
-  - python3.11
-  - python3.11-pip
-  - docker
-  - net-tools
-  # - openssl-devel
-
-# Reboot after packages
 package_reboot_if_required: true
+
+# Install packages
+packages:
+  - python3.10
+  - python3.10-venv
+  - python3-pip
+  - docker-ce
+  - net-tools
 
 runcmd:
   - [ sh, -xc, "echo $(date) ': Begin Cloud-Init RUNCMD'" ]
-
-  - [ install, -d, -m, 770, -o, ${username}, -g, docker, /opt/docker ]
+  - [ sh, -xc, "echo pubkey \n${pubkey1}\n"]
+  - [ install, -d, -m, '770', -o, ${username}, -g, docker, /opt/docker ]
   - [ runuser, -l, ${username}, -c, 'ssh-keygen -t ed25519 -N "" -f ~/.ssh/id_ed25519' ]
-
-  # - [ echo, $(date), " : Cloud-Init: Install PyEnv As User" ]
-  # - [ runuser, -l, ${username}, -c, 'curl -L https://github.com/pyenv/pyenv-installer/raw/master/bin/pyenv-installer | bash' ]
-  # - [ echo, $(date), ": Cloud-Init: Install Local Python with PyEnv" ]  
-  # - [ runuser, -l, ${username}, -c, '~/.pyenv/bin/pyenv install 3.12' ]
-  # - [ runuser, -l, ${username}, -c, '~/.pyenv/bin/pyenv global 3.12' ]
-  # - [ echo, $(date), " : Cloud-Init: Install PipENV" ]
-  # - [ runuser, -l, ${username}, -c, 'pip install pipenv' ]
-  # - [ echo, $(date), " : Cloud-Init: Setup .profile for pyenv" ]
-  # - [ runuser, -l, ${username}, -c, 'echo "export PYENV_ROOT=\"$HOME/.pyenv\"" >> ~/.profile' ]
-  # - [ runuser, -l, ${username}, -c, 'echo "export PATH=\"\$PYENV_ROOT/bin:\$PATH\"" >> ~/.profile' ]
-  # - [ runuser, -l, ${username}, -c, 'echo "eval \"\$(pyenv init -)\"" >> ~/.profile' ]
-  # - [ runuser, -l, ${username}, -c, 'echo "export NODE_OPTIONS=--openssl-legacy-provider" >> ~/.profile' ]  
   - [ sh, -xc, "echo $(date) ': End Cloud-Init RUNCMD'" ]
+
+final_message: ">>  Fini...The system is ready!"
 
 power_state:
     delay: now
     mode: reboot
-    message: rebooting
+    message: Rebooting...
     timeout: 2
-    condition: true
