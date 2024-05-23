@@ -1,0 +1,65 @@
+#cloud-config
+# figure out the hostname monkey business
+#https://cloudinit.readthedocs.io/en/latest/topics/modules.html#set-hostname
+# preserve_hostname: true
+hostname: ${hostname}
+# fqdn: ${hostname}.example.local
+# prefer_fqdn_over_hostname: true
+
+disable_root: true
+
+groups:
+  - devops
+  - docker
+
+users:
+  - name: ${username}
+    groups: [sudo, adm, docker]
+    ssh_authorized_keys:
+      - ${pubkey1}
+      - ${pubkey2}
+    shell: /bin/bash
+    sudo: ALL=(ALL) NOPASSWD:ALL
+
+# Install Packages
+package_update: true
+package_upgrade: true
+
+packages:
+  - git
+  - gcc-c++
+  - python3.11
+  - python3.11-pip
+  - docker
+  - net-tools
+  - openssl-devel
+
+# Reboot after packages
+package_reboot_if_required: true
+
+runcmd:
+  - [ sh, -xc, "echo $(date) ': Begin Cloud-Init RUNCMD'" ]
+
+  - [ install, -d, -m, 770, -o, ${username}, -g, docker, /opt/docker ]
+  - [ runuser, -l, ${username}, -c, 'ssh-keygen -t ed25519 -N "" -f ~/.ssh/id_ed25519' ]
+
+  # - [ echo, $(date), " : Cloud-Init: Install PyEnv As User" ]
+  # - [ runuser, -l, ${username}, -c, 'curl -L https://github.com/pyenv/pyenv-installer/raw/master/bin/pyenv-installer | bash' ]
+  # - [ echo, $(date), ": Cloud-Init: Install Local Python with PyEnv" ]  
+  # - [ runuser, -l, ${username}, -c, '~/.pyenv/bin/pyenv install 3.12' ]
+  # - [ runuser, -l, ${username}, -c, '~/.pyenv/bin/pyenv global 3.12' ]
+  # - [ echo, $(date), " : Cloud-Init: Install PipENV" ]
+  # - [ runuser, -l, ${username}, -c, 'pip install pipenv' ]
+  # - [ echo, $(date), " : Cloud-Init: Setup .profile for pyenv" ]
+  # - [ runuser, -l, ${username}, -c, 'echo "export PYENV_ROOT=\"$HOME/.pyenv\"" >> ~/.profile' ]
+  # - [ runuser, -l, ${username}, -c, 'echo "export PATH=\"\$PYENV_ROOT/bin:\$PATH\"" >> ~/.profile' ]
+  # - [ runuser, -l, ${username}, -c, 'echo "eval \"\$(pyenv init -)\"" >> ~/.profile' ]
+  # - [ runuser, -l, ${username}, -c, 'echo "export NODE_OPTIONS=--openssl-legacy-provider" >> ~/.profile' ]  
+  - [ sh, -xc, "echo $(date) ': End Cloud-Init RUNCMD'" ]
+
+power_state:
+    delay: now
+    mode: reboot
+    message: rebooting
+    timeout: 2
+    condition: true

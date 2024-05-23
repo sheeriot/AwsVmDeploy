@@ -5,7 +5,7 @@ resource "aws_instance" "devhost" {
   associate_public_ip_address = true
   vpc_security_group_ids = [var.secgroup-id]
   user_data = templatefile(
-    "${path.module}/scripts/cloudinit_devops.yaml", {
+    "${path.module}/scripts/cloud-init.yaml", {
       hostname = var.hostname,
       username = var.username,
       pubkey1 = var.pubkey1,
