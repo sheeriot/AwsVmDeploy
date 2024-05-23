@@ -27,12 +27,12 @@ package_upgrade: true
 
 packages:
   - git
-  - gcc-c++
+  # - gcc-c++
   - python3.11
   - python3.11-pip
   - docker
   - net-tools
-  - openssl-devel
+  # - openssl-devel
 
 # Reboot after packages
 package_reboot_if_required: true
