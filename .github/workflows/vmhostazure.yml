@@ -1,4 +1,4 @@
-name: VM Host - Terraform an Azure VM
+name: Azure VM Host - Terraform
 
 on:
   workflow_dispatch:
