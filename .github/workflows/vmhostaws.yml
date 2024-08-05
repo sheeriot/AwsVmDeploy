@@ -58,7 +58,7 @@ jobs:
           echo "CIDR_BLOCK: ${CIDR_BLOCK}"
           echo "INFRA_NAME: ${INFRA_NAME}"
           echo "OPS_IP1: ${OPS_IP1}"
-          echo "PUBKEY1: ${PUBKEY1}
+          echo "PUBKEY1: ${PUBKEY1}"
           echo "STATE_SUFFIX: ${STATE_SUFFIX}"
           echo "VM Name/Size: ${VM_NAME}/${VM_SIZE}"
 
