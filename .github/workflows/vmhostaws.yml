@@ -32,21 +32,18 @@ jobs:
     environment: ${{ github.event.inputs.environment }}
     env:
       ENV_NAME: ${{ github.event.inputs.environment }}
-      INFRA_NAME: ${{ vars.INFRA_NAME }}
-      VM_NAME: ${{ vars.VM_NAME }}
-      VM_SIZE: ${{ vars.VM_SIZE }}
       COMPONENT: ${{ github.event.inputs.component }}
       TERRAFORM_ACTION: ${{ github.event.inputs.action }}
-      ARM_TENANT_ID: ${{ vars.ARM_TENANT_ID }}
-      ARM_SUBSCRIPTION_ID: ${{ vars.ARM_SUBSCRIPTION_ID }}
-      ARM_CLIENT_ID: ${{ vars.ARM_CLIENT_ID }}
-      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-      ARM_ACCESS_KEY: ${{ secrets.ARM_TFSTATE_ACCESSKEY }}
-      TFSTATE_SUFFIX: ${{ vars.TFSTATE_SUFFIX }}
-      LOCATION: ${{ vars.LOCATION }}
+      AWS_ACCESS_KEY_ID: ${{ vars.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      AWS_REGION: ${{ vars.AWS_REGION }}
       CIDR_BLOCK: ${{ vars.CIDR_BLOCK }}
-      SSH_PUBKEY1: ${{ vars.SSH_PUBKEY1 }}
-      SSH_SRC1: ${{ vars.SSH_SRC1 }}
+      INFRA_NAME: ${{ vars.INFRA_NAME }}
+      OPS_IP1: ${{ vars.OPS_IP1 }}
+      PUBKEY1: ${{ vars.PUBKEY1 }}
+      STATE_SUFFIX: ${{ vars.STATE_SUFFIX }}
+      VM_NAME: ${{ vars.VM_NAME }}
+      VM_SIZE: ${{ vars.VM_SIZE }}
 
     steps:
 
@@ -54,16 +51,16 @@ jobs:
         run: |
           echo "ENV_NAME: ${ENV_NAME}"
           echo "TERRAFORM_ACTION: ${TERRAFORM_ACTION}"
-          echo "VM Name/Size: ${VM_NAME}/${VM_SIZE}"
-          echo "SSH_SRC1: ${SSH_SRC1}"
           echo "COMPONENT: $COMPONENT"
-          echo "ARM_TENANT_ID: $ARM_TENANT_ID"
-          echo "ARM_SUBSCRIPTION_ID: $ARM_SUBSCRIPTION_ID"
-          echo "ARM_CLIENT_ID: $ARM_CLIENT_ID"
-          echo "ARM_CLIENT_SECRET: $ARM_CLIENT_SECRET"
-          echo "TFSTATE_SUFFIX: ${TFSTATE_SUFFIX}"
-          echo "LOCATION: ${LOCATION}"
-          echo "CIDR_BLOCK: $CIDR_BLOCK"
+          echo "AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}"
+          echo "AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}"
+          echo "AWS_REGION: ${AWS_REGION}"
+          echo "CIDR_BLOCK: ${CIDR_BLOCK}"
+          echo "INFRA_NAME: ${INFRA_NAME}"
+          echo "OPS_IP1: ${OPS_IP1}"
+          echo "PUBKEY1: ${PUBKEY1}
+          echo "STATE_SUFFIX: ${STATE_SUFFIX}"
+          echo "VM Name/Size: ${VM_NAME}/${VM_SIZE}"
 
       - name: Checkout Code
         uses: actions/checkout@v4
