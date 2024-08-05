@@ -26,7 +26,7 @@ export TF_VAR_aws_region=$AWS_REGION
 
 STATE_SUFFIX=$(echo "${STATE_SUFFIX}" | tr '[:upper:]' '[:lower:]')
 export TFSTATE_BUCKETNAME="${INFRA_NAME}-${TF_VAR_env_name}-${STATE_SUFFIX}"
-# export TF_VAR_tfstate_bucketname="${TFSTATE_BUCKETNAME}"
+export TF_VAR_tfstate_bucketname="${TFSTATE_BUCKETNAME}"
 
 CIDR_BLOCK=$(echo "${CIDR_BLOCK}" | tr -d '[:space:]')
 export TF_VAR_cidr_block="${CIDR_BLOCK}"
